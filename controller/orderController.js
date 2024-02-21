@@ -44,6 +44,9 @@ export const createOrder =async (req, res) => {
 }
 
 export const getOrders = async (req, res) => {
+    const ordr =  await Order.find()
+    console.log(ordr);
+    
     const orders= await Order.aggregate([
         {
             $lookup:{
@@ -54,10 +57,8 @@ export const getOrders = async (req, res) => {
             }
         }
     ])
+    console.log(orders,'oo');
     const count= await Order.countDocuments();
-
-
-
 
 
     if (orders.length === 0) {
